@@ -55,12 +55,22 @@ new class extends Component {
             <div class="grid grid-cols-2 gap-4 mt-12">
                 @foreach ($notes as $note)
                     <div class="p-4 bg-white rounded-md shadow-md" wire:key='{{ $note->id }}'>
-                        <a href="{{ route('notes.edit', $note) }}"
-                            class="text-xl font-bold hover:underline hover:text-blue-500">{{ $note->subject }}</a>
-                        <p>{{ Str::limit($note->body, 30) }}</p>
-                        <div class="flex justify-end mt-4">
-                            <x-button.circle icon="eye" href="{{ route('notes.view', $note) }}" />
-                            <x-button.circle icon="trash" wire:click="delete('{{ $note->id }}')" />
+                        <div class="flex justify-between">
+                            <div>
+                                <a href="{{ route('notes.edit', $note) }}"
+                                    class="text-xl font-bold hover:underline hover:text-blue-500">{{ $note->subject }}</a>
+                                <p>{{ Str::limit($note->body, 30) }}</p>
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                {{ \Carbon\Carbon::parse($note->send_date)->format('M-d-Y') }}
+                            </div>
+                        </div>
+                        <div class="flex items-end justify-between mt-4 space-x-1">
+                            <p class="text-xs">Recipient: <span class="font-semibold">{{ $note->recipient }}</span></p>
+                            <div>
+                                <x-button.circle icon="eye" href="{{ route('notes.view', $note) }}" />
+                                <x-button.circle icon="trash" wire:click="delete('{{ $note->id }}')" />
+                            </div>
                         </div>
                     </div>
                 @endforeach
