@@ -38,7 +38,9 @@ Volt::route('notes/{note}/edit', 'notes.edit-note')
     ->name('notes.edit');
 
 Route::get('notes/{note}', function (Note $note) {
-    return view('notes.view', ['note' => $note]);
+    $user = $note->user;
+
+    return view('notes.view', ['note' => $note, 'user' => $user]);
 })->name('notes.view')->can('view', 'note');
 
 require __DIR__.'/auth.php';

@@ -59,6 +59,7 @@ new class extends Component {
                             class="text-xl font-bold hover:underline hover:text-blue-500">{{ $note->subject }}</a>
                         <p>{{ Str::limit($note->body, 30) }}</p>
                         <div class="flex justify-end mt-4">
+                            <x-button.circle icon="eye" href="{{ route('notes.view', $note) }}" />
                             <x-button.circle icon="trash" wire:click="delete('{{ $note->id }}')" />
                         </div>
                     </div>
