@@ -32,7 +32,7 @@ new class extends Component {
         return [
             'notes' => Auth::user()
                 ->notes()
-                ->orderBy('id', 'desc')
+                ->orderBy('send_date', 'asc')
                 ->get(),
         ];
     }
