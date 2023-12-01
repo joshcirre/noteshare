@@ -9,6 +9,7 @@ new #[Layout('layouts.app')] class extends Component {
 
     public $noteBody;
     public $noteSubject;
+    public $notePublished;
 
     public function mount(Note $note)
     {
@@ -16,6 +17,7 @@ new #[Layout('layouts.app')] class extends Component {
         $this->fill($note);
         $this->noteBody = $note->body;
         $this->noteSubject = $note->subject;
+        $this->notePublished = $note->published;
     }
 
     public function saveNote()
@@ -28,6 +30,7 @@ new #[Layout('layouts.app')] class extends Component {
         $this->note->update([
             'subject' => $this->noteSubject,
             'body' => $this->noteBody,
+            'published' => $this->notePublished,
         ]);
 
         $this->dispatch('note-saved');
@@ -47,6 +50,7 @@ new #[Layout('layouts.app')] class extends Component {
                 <form class="space-y-4" wire:submit='saveNote'>
                     <x-input label="Note Subject" placeholder="It's been a great day." wire:model='noteSubject' />
                     <x-textarea label="Notes" placeholder="Let your thoughts fill the page." wire:model='noteBody' />
+                    <x-checkbox label="Note is Published" wire:model='notePublished' />
                     <div class="flex justify-between pt-4">
                         <x-button secondary spinner="saveNote" type="submit">Save Note </x-button>
                         <x-button href="{{ route('notes') }}" flat negative>Back to Notes</x-button>

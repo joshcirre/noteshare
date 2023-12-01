@@ -20,7 +20,8 @@ class NotePolicy
      */
     public function view(User $user, Note $note): bool
     {
-        return $user?->id === $note->user_id;
+        // only if the Note is published
+        return $note->published;
     }
 
     /**
@@ -44,7 +45,7 @@ class NotePolicy
      */
     public function delete(User $user, Note $note): bool
     {
-        return $user?->id === $note->user_id;
+        return true;
     }
 
     /**

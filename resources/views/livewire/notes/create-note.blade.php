@@ -22,18 +22,11 @@ new class extends Component {
             'subject' => $this->noteSubject,
             'body' => $this->noteBody,
             'recipient' => $this->noteRecipient,
+            'published' => true,
             'send_date' => now()->addDay(),
         ]);
 
         redirect('/notes');
-    }
-
-    public function saveNote()
-    {
-        $this->validate([
-            'noteSubject' => ['required', 'string', 'min:5'],
-            'noteBody' => ['required', 'string', 'min:20'],
-        ]);
     }
 }; ?>
 
@@ -45,7 +38,6 @@ new class extends Component {
         <div class="flex pt-4 space-x-4">
             <x-button primary right-icon="calendar" type="submit" spinner>Schedule
                 Note</x-button>
-            <x-button secondary wire:click='saveNote' spinner="saveNote">Save Note </x-button>
         </div>
         <x-errors />
     </form>
