@@ -23,13 +23,14 @@
         @endif
 
         <div class="p-6 mx-auto max-w-7xl lg:p-8">
-            <div class="min-h-screen hero bg-base-200">
-                <div class="text-center hero-content">
-                    <div class="max-w-md">
-                        <x-application-logo class="w-48 h-48 fill-current text-primary" />
-                        <p class="py-6">
-                            Welcome to my app! Get started today.
-                        </p>
+            <div class="flex items-center justify-center max-w-6xl">
+                <div class="text-center">
+                    <div class="px-10 py-24 mx-auto space-y-4 align-middle max-w-7xl">
+                        <div class="flex flex-col items-center space-y-8">
+                            <x-application-logo class="w-24 h-24 fill-current text-primary" />
+                            <x-button primary xl href="{{ route('dashboard') }}">
+                                Get Started</x-button>
+                        </div>
                     </div>
                 </div>
             </div>
