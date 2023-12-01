@@ -10,6 +10,7 @@ new #[Layout('layouts.app')] class extends Component {
     public $noteBody;
     public $noteSubject;
     public $notePublished;
+    public $noteSendDate;
 
     public function mount(Note $note)
     {
@@ -18,6 +19,7 @@ new #[Layout('layouts.app')] class extends Component {
         $this->noteBody = $note->body;
         $this->noteSubject = $note->subject;
         $this->notePublished = $note->published;
+        $this->noteSendDate = $note->send_date;
     }
 
     public function saveNote()
@@ -25,11 +27,13 @@ new #[Layout('layouts.app')] class extends Component {
         $this->validate([
             'noteSubject' => ['required', 'string', 'min:5'],
             'noteBody' => ['required', 'string', 'min:20'],
+            'noteSendDate' => ['required', 'date'],
         ]);
 
         $this->note->update([
             'subject' => $this->noteSubject,
             'body' => $this->noteBody,
+            'send_date' => $this->noteSendDate,
             'published' => $this->notePublished,
         ]);
 
@@ -50,6 +54,8 @@ new #[Layout('layouts.app')] class extends Component {
                 <form class="space-y-4" wire:submit='saveNote'>
                     <x-input label="Note Subject" placeholder="It's been a great day." wire:model='noteSubject' />
                     <x-textarea label="Notes" placeholder="Let your thoughts fill the page." wire:model='noteBody' />
+                    <x-datetime-picker label="Send Date" placeholder="Send Date" wire:model="noteSendDate"
+                        :min="now()->addDay()" without-time="true" without-tips="true" />
                     <x-checkbox label="Note is Published" wire:model='notePublished' />
                     <div class="flex justify-between pt-4">
                         <x-button secondary spinner="saveNote" type="submit">Save Note </x-button>

@@ -57,8 +57,12 @@ new class extends Component {
                     <div class="p-4 bg-white rounded-md shadow-md" wire:key='{{ $note->id }}'>
                         <div class="flex justify-between">
                             <div>
-                                <a href="{{ route('notes.edit', $note) }}"
-                                    class="text-xl font-bold hover:underline hover:text-blue-500">{{ $note->subject }}</a>
+                                @can('update', $note)
+                                    <a href="{{ route('notes.edit', $note) }}"
+                                        class="text-xl font-bold hover:underline hover:text-blue-500">{{ $note->subject }}</a>
+                                @else
+                                    <p class="text-xl font-bold text-gray-400">{{ $note->subject }}</p>
+                                @endcan
                                 <p>{{ Str::limit($note->body, 30) }}</p>
                             </div>
                             <div class="text-xs text-gray-500">
