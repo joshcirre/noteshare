@@ -25,7 +25,7 @@ class NoteFactory extends Factory
             'recipient' => $this->faker->email,
             'published' => true,
             'send_date' => $this->faker->dateTimeBetween('-30 days', '+30 days')->format('Y-m-d'),
-            'heart_count' => $this->faker->numberBetween(0, 100),
+            'heart_count' => $this->faker->numberBetween(0, 5),
         ];
     }
 }
