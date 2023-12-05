@@ -32,7 +32,6 @@ class SendScheduledNotes extends Command
         $now = Carbon::now();
         $notes = Note::where('published', true)
             ->whereDate('send_date', $now->toDateString())
-            ->whereTime('send_date', '<=', $now->toTimeString())
             ->get();
 
         $noteCount = $notes->count();
