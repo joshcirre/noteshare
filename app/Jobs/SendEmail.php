@@ -33,7 +33,7 @@ class SendEmail implements ShouldQueue
         // Send the email using your preferred email sending method
 
         Mail::raw($emailContent, function ($message) {
-            $message->from('notes@noteshare.com', 'Noteshare')
+            $message->from('noteshare@zimfy.co', 'Noteshare')
                 ->to($this->note->recipient)
                 ->subject('You have a new note from '.$this->note->user->name);
         });
