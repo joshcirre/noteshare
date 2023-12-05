@@ -25,7 +25,7 @@ new class extends Component {
             'body' => $this->noteBody,
             'recipient' => $this->noteRecipient,
             'published' => true,
-            'send_date' => $noteSendDate ?? now()->addDay(),
+            'send_date' => $this->$noteSendDate ?? now()->addDay(),
         ]);
 
         redirect('/notes');
