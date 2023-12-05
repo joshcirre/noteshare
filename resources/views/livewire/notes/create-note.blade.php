@@ -37,8 +37,7 @@ new class extends Component {
         <x-input label="Note Subject" placeholder="It's been a great day." wire:model='noteSubject' />
         <x-textarea label="Notes" placeholder="Let your thoughts fill the page." wire:model='noteBody' />
         <x-input icon="user" label="Recipient" placeholder="yourfriend@email.com" wire:model='noteRecipient' />
-        <x-datetime-picker label="Send Date" placeholder="Send Date" wire:model="noteSendDate" :min="now()->addDay()"
-            without-time="true" without-tips="true" />
+        <x-input wire:model='noteSendDate' icon="calendar" label="Send Date" type="date" />
         <div class="flex pt-4 space-x-4">
             <x-button primary right-icon="calendar" type="submit" spinner>Schedule
                 Note</x-button>
