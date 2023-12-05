@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Note;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -38,9 +39,11 @@ Volt::route('notes/{note}/edit', 'notes.edit-note')
     ->name('notes.edit');
 
 Route::get('notes/{note}', function (Note $note) {
+
+    Gate::authorize('view', $note);
     $user = $note->user;
 
     return view('notes.view', ['note' => $note, 'user' => $user]);
-})->name('notes.view')->can('view', 'note');
+})->name('notes.view');
 
 require __DIR__.'/auth.php';
