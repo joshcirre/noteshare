@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Note;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -39,8 +38,11 @@ Volt::route('notes/{note}/edit', 'notes.edit-note')
     ->name('notes.edit');
 
 Route::get('notes/{note}', function (Note $note) {
+    // Check if the note is published
+    if (! $note->published) {
+        abort(404); // Or you could use abort(403) if you want to indicate that it's forbidden
+    }
 
-    Gate::authorize('view', $note);
     $user = $note->user;
 
     return view('notes.view', ['note' => $note, 'user' => $user]);

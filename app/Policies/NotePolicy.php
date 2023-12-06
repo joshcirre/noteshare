@@ -10,9 +10,9 @@ class NotePolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(): bool
+    public function viewAny(User $user, Note $note): bool
     {
-        return true;
+        //
     }
 
     /**
@@ -20,8 +20,7 @@ class NotePolicy
      */
     public function view(User $user, Note $note): bool
     {
-        // only if the Note is published
-        return $note->published;
+        //
     }
 
     /**
